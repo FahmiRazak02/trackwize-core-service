@@ -1,8 +1,41 @@
 server:
-  port: 8080
+  port: 8090
   servlet:
     context-path: /api
 
 spring:
   application:
     name: trackwize-core-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/trackwize_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: TrackWize@12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 10
+      minimumIdle: 10
+      validationTimeout: 5000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+
+  artemis:
+    mode: native
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    receive-timeout: 5000
+    queues:
+      email: ntf_email_queue
+      inbox: ntf_inbox_queue
+
+jwt:
+  secret: xY75xfcUBuUt2fqB0pK/3194y319IJN==SIbASFi4as35SD=
+  defaultAccessTokenTimeout: 1800          #15minitbut i
+  defaultRefreshTokenTimeout: 2592000    #30 days

@@ -1,5 +1,6 @@
 package com.trackwize.core.mapper;
 
+import com.trackwize.core.model.dto.ExpenseListReqDTO;
 import com.trackwize.core.model.entity.Expense;
 import com.trackwize.core.provider.expense.ExpenseProvider;
 import org.apache.ibatis.annotations.*;
@@ -27,4 +28,16 @@ public interface ExpenseMapper {
     @InsertProvider(type = ExpenseProvider.class, method = "create")
     @Options(useGeneratedKeys = true, keyProperty = "expenseId")
     int create(Expense expense);
+
+    @UpdateProvider(type = ExpenseProvider.class, method = "update")
+    int update(Expense expense);
+
+    @DeleteProvider(type = ExpenseProvider.class, method = "delete")
+    int deleteById(Long expenseId);
+
+    @SelectProvider(type = ExpenseProvider.class, method = "findById")
+    @ResultMap("expenseMap")
+    Expense findById(Long expenseId);
+
+    List<Expense> findAllWithFilter(ExpenseListReqDTO reqDTO);
 }

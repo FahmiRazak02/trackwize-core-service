@@ -19,6 +19,7 @@ public class Expense {
     private String description;
     private Instant expenseDate;
 
+    private String status;
     private Long createdBy = 0L;
     private Instant createdDate;
     private Long updatedBy;
